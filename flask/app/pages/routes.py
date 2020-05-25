@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, url_for
+from app import 
 
 pages = Blueprint('pages', __name__)
 
@@ -9,4 +10,5 @@ def index():
 
     :return: homepage
     '''
+
     return render_template('index.html')
