@@ -46,8 +46,6 @@ class Answer(db.Model):
     correct = db.Column(db.Boolean, default=False)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
 
-    def __init__(self):
-        return self.id
 
 
 

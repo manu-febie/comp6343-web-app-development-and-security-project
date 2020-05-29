@@ -14,9 +14,9 @@ class Course(db.Model):
 
     # establish many-to-many relationships with Teacher & Class model
     teachers = db.relationship('Teacher', secondary='course_teachers',
-                               backref='course', lazy='dynamic')
-    courses = db.relationship('Class', secondary='course_classes',
-                               backref='course', lazy='dynamic')
+                               backref='courses', lazy='dynamic')
+    classes = db.relationship('Class', secondary='course_classes',
+                               backref='courses', lazy='dynamic')
      
     
     def __str__(self):
@@ -30,7 +30,7 @@ class Course(db.Model):
 # and teachers
 db.Table('course_teachers',
         db.Column('course_id', db.Integer, db.ForeignKey('course.id')),
-        db.Column('teacher_id', db.Integer, db.ForeignKey('teacher.id'))
+        db.Column('used_id', db.Integer, db.ForeignKey('user.id'))
         )
 
 
