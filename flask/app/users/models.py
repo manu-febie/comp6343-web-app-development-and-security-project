@@ -1,4 +1,5 @@
 from app import db
+from app.classes.models import Class
 
 
 class AbstractBaseUser(db.Model):
@@ -19,13 +20,6 @@ class AbstractBaseUser(db.Model):
     is_active = db.Column(db.Boolean(), default=True) 
     # avatar
 
-    def __init__(self, firstname, lastname, email, password, password_confirm):
-        self.firstname = firstname
-        self.lastname = lastname
-        self.email = email
-        self.password = password
-        self.password_confirm = password_confirm
-
     def __str__(self):
         return '{} {}'.format(self.firstname, self.lastname)
 
@@ -40,10 +34,7 @@ class Student(AbstractBaseUser):
     '''
     is_student = db.Column(db.Boolean(), default=True)
     student_id = db.Column(db.String(50), nullable=False)
-
-    def __init__(self, firstname, lastname, email, password, password_confirm, student_id):
-        super().__init__(firstname, lastname, email, password, password_confirm)
-        self.student_id = student_id
+    class_id = db.Column(db.Integer, db.ForeignKey('class.id'))
 
 
 class Teacher(AbstractBaseUser):

@@ -23,4 +23,4 @@ from app.pages.routes import pages
 from app.users.routes import users
 
 app.register_blueprint(pages)
-pp.register_blueprint(users)
+app.register_blueprint(users)
