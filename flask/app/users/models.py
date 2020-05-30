@@ -25,8 +25,6 @@ class UserRoles(db.Model):
 
 class User(db.Model, UserMixin):
     '''
-    An abstract class for User models. 
-    Does not create a table inside the database.
     ''' 
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(255), nullable=False)
@@ -43,6 +41,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return '<User {} {}>'.format(self.firstname, self.lastname)
+
 
 
 
