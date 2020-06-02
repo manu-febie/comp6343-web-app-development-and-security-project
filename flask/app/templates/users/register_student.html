@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Register as student{% endblock title %}
+
+{% block body %}
+
+<div class="row section">
+    <div class="col l4 section">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Not yet registered?</span>
+                QuizDown provides an easy to user interface for educators and students. See who makes use QuizIt.
+            </div>
+            <div class="card-action">
+                <a href="">Learn more</a>
+            </div>
+        </div>
+    </div>
+    <div class="col l8 section">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Register as a student</span>
+                <form action="" method="post">
+                    {{ form.csrf_token }}
+
+                    <div class="input-field">
+                        {{ form.firstname }}
+                        {{ form.firstname.label() }}
+                    </div>
+                    <div class="input-field">
+                        {{ form.lastname}}
+                        {{ form.lastname.label() }}
+                    </div>
+                    <div class="input-field">
+                        {{ form.email }}
+                        {{ form.email.label() }}
+                    </div>
+                    <div class="input-field">
+                        {{ form.password1 }}
+                        {{ form.password1.label() }}
+                    </div>
+                    <div class="input-field">
+                        {{ form.password2 }}
+                        {{ form.password2.label() }}
+                    </div>
+                    <div class="input-field">
+                        {{ form.student_id  }}
+                        {{ form.student_id.label() }}
+                    </div>
+                    <div class="input-field">
+                        {{ form.submit(class="btn red") }}
+                    </div>
+                </form>
+            </div>
+            <div class="card-action">
+                Already an account? <a href="#">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

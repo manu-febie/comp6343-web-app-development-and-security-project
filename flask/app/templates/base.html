@@ -11,6 +11,17 @@
 </head>
 <body>
 
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">Quiz</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="{{ url_for('users.student_register') }}">Students</a></li>
+                <li><a href="{{ url_for('users.educator_register') }}">Educators</a></li>
+                <li><a href="">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
     <div class="container">
     {% block body %} 
     {% endblock body %}

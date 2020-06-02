@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_user import UserManager
 from dotenv import load_dotenv
 
 import os
@@ -23,10 +24,14 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 # import models
-from app.users.models import User, Role, UserRoles
-from app.classes.models import Class
-from app.courses.models import Course
-from app.quiz.models import Quiz, Question, Answer
+from app.users.models import User, Role, UserRoles, Student, Educator
+from app.institutions.models import Stage, EducationalStages, Institution
+# from app.classes.models import Class
+# from app.courses.models import Course
+# from app.quiz.models import Quiz, Question, Answer
+
+# setup Flask-User
+user_manager = UserManager(app, db, User)
 
 
 # blueprints
