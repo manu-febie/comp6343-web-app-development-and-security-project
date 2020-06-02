@@ -1,7 +1,7 @@
-from app import db
-from flask import Blueprint, render_template, url_for
-from app.users.models import Role, User, Student, Educator
-from app.users.forms import EducatorRegisterForm, StudentRegisterForm
+from app import db, user_manager
+from flask import Blueprint, render_template, url_for, redirect
+from app.users.models import UserRoles, Role, BaseUser, Student, Educator
+from app.users.forms import EducatorRegisterForm, StudentRegisterForm, UserLoginForm
 
 users = Blueprint('users', __name__)
 
@@ -11,19 +11,28 @@ def student_register():
     Register a student
     '''
     form = StudentRegisterForm()
+    role = Role.query.filter_by(name='student').first()
 
     if form.validate_on_submit():
         # fill User object with -> firstname, lastname, email, password
-        user = User(
+        user = BaseUser(
                     firstname=form.firstname.data,
                     lastname=form.lastname.data,
                     email=form.email.data,
-                    password=form.password1.data,
+                    # NOTE! password needst to be hashed
+                    password=user_manager.hash_password(form.password1.data)
                 )
-        # assign Role -> student
-        user.roles.append(Role(name='student'))
         # commit new User object 
         db.session.add(user)
+        db.session.commit()
+
+        # assign Role -> student to user
+        role = UserRoles(
+                        user_id=user.id,
+                        role_id=role.id
+                    ) 
+        # commit to db
+        db.session.add(role)
         db.session.commit()
 
         # establish one-to-one connection to Student data-model
@@ -45,7 +54,8 @@ def educator_register():
     Register an educator
     '''
     form = EducatorRegisterForm()
-    user = User()
+    user = BaseUser()
+    role = Role.query.filter_by(name='educator').first()
     
     if form.validate_on_submit():
         # fill User object with -> firstname, lastname, email, password
@@ -53,9 +63,23 @@ def educator_register():
         user.lastname = form.lastname.data
         user.email = form.email.data
         user.password = form.password1.data 
+        # add and commit user to db
+        db.session.add(user)
+        db.session.commit()
+
         # assign Role -> educator
-        user.roles.append(Role(name='educator'))
+        new_educator = UserRoles(
+                            user_id=user.id,
+                            role_id=role.id
+                )
+        db.session.add(new_educator)
+        db.session.commit()
+ 
         # establish one-to-one connection to Educator object
+        educator = Educator(
+                    id = user.id
+                )
+        db.session.add(educator)
         
         # Commit to db
         db.session.add(user)
@@ -67,3 +91,17 @@ def educator_register():
     return render_template('/users/register_educator.html', form=form)
 
 # login route
+@users.route('/login', methods=['GET', 'POST'])
+def login():
+    form = UserLoginForm()
+
+    if form.validate_on_submit():
+        # Get user by email
+        user = BaseUser.query.filter_by(email=form.email.data).first()
+
+        if not user and not user_manager.verify_password(form.password.data, user.password):
+            print('incorrect email or password')
+        else:
+            print('Hello {} {}'.format(user.firstname, user.lastname)) 
+
+    return render_template('users/login.html', form=form)

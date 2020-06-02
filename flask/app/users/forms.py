@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import BooleanField, StringField, PasswordField, SubmitField
 from wtforms.validators import Email, EqualTo
 
 
@@ -24,3 +24,8 @@ class EducatorRegisterForm(RegisterBaseForm):
 class StudentRegisterForm(RegisterBaseForm):
     student_id = StringField('student id')
      
+
+class UserLoginForm(FlaskForm):
+    email = StringField('email')
+    password = PasswordField('password')
+    submit = SubmitField('login')

@@ -24,15 +24,14 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 # import models
-from app.users.models import User, Role, UserRoles, Student, Educator
+from app.users.models import BaseUser, Role, UserRoles, Student, Educator
 from app.institutions.models import Stage, EducationalStages, Institution
 # from app.classes.models import Class
 # from app.courses.models import Course
 # from app.quiz.models import Quiz, Question, Answer
 
 # setup Flask-User
-user_manager = UserManager(app, db, User)
-
+user_manager = UserManager(app, db, BaseUser)
 
 # blueprints
 from app.pages.routes import pages

@@ -1,5 +1,5 @@
-from app import db
-from flask_user import UserMixin
+from app import app, db
+from flask_user import UserMixin, UserManager
 from datetime import datetime
 
 
@@ -24,15 +24,16 @@ class UserRoles(db.Model):
     __tablename__ = 'user_roles'
     
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'))
+    user_id = db.Column(db.Integer, db.ForeignKey('base_user.id', ondelete='CASCADE'))
     role_id = db.Column(db.Integer, db.ForeignKey('role.id', ondelete='CASCADE'))
 
 
-class User(db.Model, UserMixin):
+class BaseUser(db.Model, UserMixin):
     '''
     User data-model: Represents either a student or a teacher.
     email attribute is used for authentication
     '''
+    __tablename__ = 'base_user'
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(50), nullable=False)
     lastname = db.Column(db.String(50), nullable=False)
@@ -53,7 +54,7 @@ class Student(db.Model):
     Student data-model: some additional fields for user of type 'student'.
     Has one-to-one relationship with User data-model - (extending the User data-model).
     '''
-    id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey('base_user.id', ondelete='CASCADE'), primary_key=True)
     student_id = db.Column(db.String(50), unique=True)
     
     def __str__(self):
@@ -67,6 +68,5 @@ class Educator(db.Model):
     '''
     Educator data-model: some aditional fields for user of type 'educator'
     '''
-    id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey('base_user.id', ondelete='CASCADE'), primary_key=True)
     institution_id = db.Column(db.Integer, db.ForeignKey('institution.id', ondelete='CASCADE'), nullable=True)
-
