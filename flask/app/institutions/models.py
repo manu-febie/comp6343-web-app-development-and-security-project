@@ -27,10 +27,9 @@ class EducationalStages(db.Model):
 class Institution(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False, unique=True)
-
-    # educators belonging to an institution
-    educators = db.relationship('Educator', backref='institution', lazy='dynamic')
-        
+    class_code_id = db.Column(db.Integer, db.ForeignKey('class_code.id', ondelete='CASCADE'))
+    educators - db.Column(db.Integer, db.ForeignKey('educators.id', ondelete='CASCADE'))
+     
     # back reference
     stages = db.relationship('Stage', secondary='educational_stages')
 

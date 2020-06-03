@@ -62,7 +62,7 @@ def educator_register():
         user.firstname = form.firstname.data
         user.lastname = form.lastname.data
         user.email = form.email.data
-        user.password = form.password1.data 
+        user.password = user_manager.hash_password(f)
         # add and commit user to db
         db.session.add(user)
         db.session.commit()
@@ -99,9 +99,9 @@ def login():
         # Get user by email
         user = BaseUser.query.filter_by(email=form.email.data).first()
 
-        if not user and not user_manager.verify_password(form.password.data, user.password):
-            print('incorrect email or password')
-        else:
+        if user and user_manager.verify_password(form.password.data, user.password):
             print('Hello {} {}'.format(user.firstname, user.lastname)) 
+        else:
+            print('OOhh Nooo')
 
     return render_template('users/login.html', form=form)
