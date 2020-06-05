@@ -41,6 +41,7 @@ class BaseUser(db.Model, UserMixin):
     password = db.Column(db.String(120), nullable=False)
     active = db.Column(db.Boolean, nullable=False, server_default='1')
     joined = db.Column(db.DateTime, default=datetime.utcnow())
+    school_id = db.Column(db.Integer, db.ForeignKey('school.id', ondelete='CASCADE'))
 
     # backref to roles
     roles = db.relationship('Role', secondary='user_roles', backref='user', lazy='dynamic')
@@ -69,4 +70,3 @@ class Educator(db.Model):
     Educator data-model: some aditional fields for user of type 'educator'
     '''
     id = db.Column(db.Integer, db.ForeignKey('base_user.id', ondelete='CASCADE'), primary_key=True)
-    institution_id = db.Column(db.Integer, db.ForeignKey('institution.id', ondelete='CASCADE'), nullable=True)

@@ -10,7 +10,6 @@ class ClassCode(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     class_code = db.Column(db.String(20), unique=True)
-    student_id = db.Column(db.Integer, db.ForeignKey('student.id', ondelete='CASCADE'))
 
     def __str__(self):
         return self.class_id
@@ -45,7 +44,7 @@ class CourseEnrollment(db.Model):
     class_code_id = db.Column(db.Integer, db.ForeignKey('class_code.id', ondelete='CASCADE'))
 
 
-class EducatorCourse(db.Model):
+class Courses(db.Model):
     '''
     Educator Class data-model:
     An educator can have multiple classes.

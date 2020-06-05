@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_user import UserManager
+from flask_mail import Mail
 from dotenv import load_dotenv
 
 import os
@@ -19,15 +20,28 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = False
 
+# Flask Mail 
+# app.config['MAIL_SERVER'] = 
+# app.config['MAIL_PORT']
+# app.config['MAIL_USE_TLS']
+# app.config['MAIL_USE_SSL']
+# app.config['MAIL_DEBUG']
+# app.config['MAIL_USERNAME']
+# app.config['MAIL_PASSWORD']
+# app.config['MAIL_DEFAULT_SENDER']
+# app.config['MAIL_MAX_EMAILS']
+# app.config['MAIL_SUPRESS_SEND']
+# app.config['MAIL_ASCII_ATTACHMENTS']
+
 # Database instance
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+mail = Mail(app)
+#migrate = Migrate(app, db)
 
 # import models
 from app.users.models import BaseUser, Role, UserRoles, Student, Educator
-from app.institutions.models import Stage, EducationalStages, Institution
-# from app.classes.models import Class
-# from app.courses.models import Course
+from app.schools.models import School
+# from app.courses.models import ClassCode, Course, CourseEnrollment, EducatorCourse
 # from app.quiz.models import Quiz, Question, Answer
 
 # setup Flask-User

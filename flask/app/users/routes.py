@@ -59,10 +59,13 @@ def educator_register():
     
     if form.validate_on_submit():
         # fill User object with -> firstname, lastname, email, password
-        user.firstname = form.firstname.data
-        user.lastname = form.lastname.data
-        user.email = form.email.data
-        user.password = user_manager.hash_password(f)
+        user = BaseUser(
+            firstname = form.firstname.data
+            lastname = form.lastname.data
+            email = form.email.data
+            password = user_manager.hash_password(form.password.data)
+            )
+
         # add and commit user to db
         db.session.add(user)
         db.session.commit()
@@ -82,11 +85,10 @@ def educator_register():
         db.session.add(educator)
         
         # Commit to db
-        db.session.add(user)
         db.session.add(educator)
         db.session.commit()
 
-        print('successfully added new educator')
+        # redirect to institution page
 
     return render_template('/users/register_educator.html', form=form)
 
