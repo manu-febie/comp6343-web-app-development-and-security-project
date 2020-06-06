@@ -44,7 +44,7 @@ class CourseEnrollment(db.Model):
     class_code_id = db.Column(db.Integer, db.ForeignKey('class_code.id', ondelete='CASCADE'))
 
 
-class Courses(db.Model):
+class EducatorCourses(db.Model):
     '''
     Educator Class data-model:
     An educator can have multiple classes.

@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_user import UserManager
+from flask_user import UserManager, SQLAlchemyAdapter
 from flask_mail import Mail
 from dotenv import load_dotenv
 
@@ -41,11 +41,12 @@ mail = Mail(app)
 # import models
 from app.users.models import BaseUser, Role, UserRoles, Student, Educator
 from app.schools.models import School
-# from app.courses.models import ClassCode, Course, CourseEnrollment, EducatorCourse
+from app.courses.models import ClassCode, Course, CourseEnrollment, EducatorCourses
 # from app.quiz.models import Quiz, Question, Answer
 
 # setup Flask-User
 user_manager = UserManager(app, db, BaseUser)
+#db_adapter = SQLAlchemyAdapter(db, BaseUser)
 
 # blueprints
 from app.pages.routes import pages

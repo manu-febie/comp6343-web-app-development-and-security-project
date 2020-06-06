@@ -11,7 +11,7 @@ def student_register():
     Register a student
     '''
     form = StudentRegisterForm()
-    role = Role.query.filter_by(name='student').first()
+    role = Role.query.filter(Role.name=='student').first()
 
     if form.validate_on_submit():
         # fill User object with -> firstname, lastname, email, password
@@ -54,16 +54,15 @@ def educator_register():
     Register an educator
     '''
     form = EducatorRegisterForm()
-    user = BaseUser()
-    role = Role.query.filter_by(name='educator').first()
+    role = Role.query.filter(Role.name=='educator').first()
     
     if form.validate_on_submit():
         # fill User object with -> firstname, lastname, email, password
         user = BaseUser(
-            firstname = form.firstname.data
-            lastname = form.lastname.data
-            email = form.email.data
-            password = user_manager.hash_password(form.password.data)
+            firstname = form.firstname.data,
+            lastname = form.lastname.data,
+            email = form.email.data,
+            password = user_manager.hash_password(form.password1.data),
             )
 
         # add and commit user to db
@@ -99,7 +98,7 @@ def login():
 
     if form.validate_on_submit():
         # Get user by email
-        user = BaseUser.query.filter_by(email=form.email.data).first()
+        user = BaseUser.query.filter(BaseUser.email==form.email.data).first()
 
         if user and user_manager.verify_password(form.password.data, user.password):
             print('Hello {} {}'.format(user.firstname, user.lastname)) 

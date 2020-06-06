@@ -6,7 +6,7 @@ class School(db.Model):
     '''
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
-    users = db.relationship('educator.id', backref='school', lazy='dynamic')
+    users = db.relationship('BaseUser', backref='school', lazy='dynamic')
 
     
     def __str__(self):
