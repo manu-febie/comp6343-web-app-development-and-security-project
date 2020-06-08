@@ -25,7 +25,9 @@ class Course(db.Model):
     course_id = db.Column(db.String(20), nullable=False, unique=True)
     name = db.Column(db.String(120), nullable=False)
     description = db.Column(db.Text, nullable=False)
-
+    
+    # backref to quiz
+    quizzes = db.relationship('Quiz', backref='course', lazy='dynamic')
  
     def __str__(self):
         return self.name

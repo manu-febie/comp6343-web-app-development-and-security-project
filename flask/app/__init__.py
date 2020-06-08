@@ -51,6 +51,8 @@ user_manager = UserManager(app, db, BaseUser)
 # blueprints
 from app.pages.routes import pages
 from app.users.routes import users
+from app.quiz.routes import quiz
 
 app.register_blueprint(pages)
 app.register_blueprint(users)
+app.register_blueprint(quiz)

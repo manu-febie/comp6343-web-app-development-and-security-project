@@ -11,3 +11,7 @@ def index():
     '''
 
     return render_template('index.html')
+
+@pages.route('/')
+def educator_dashboard():
+    return render_template('pages/educator_dashboard.html')
