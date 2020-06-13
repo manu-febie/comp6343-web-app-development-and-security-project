@@ -54,3 +54,7 @@ class EducatorCourses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id', ondelete='CASCADE'))
     educator_id = db.Column(db.Integer, db.ForeignKey('educator.id', ondelete='CASCADE'))
+
+
+def course_query():
+    return Course.query

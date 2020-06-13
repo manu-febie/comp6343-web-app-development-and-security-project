@@ -1,9 +1,15 @@
-from app import db, user_manager
+from app import db, user_manager, login_manager
 from flask import Blueprint, render_template, url_for, redirect
+from flask_login import login_user, logout_user, login_required
 from app.users.models import UserRoles, Role, BaseUser, Student, Educator
 from app.users.forms import EducatorRegisterForm, StudentRegisterForm, UserLoginForm
 
 users = Blueprint('users', __name__)
+
+# user loader
+@login_manager.user_loader
+def load_user(id):
+    return BaseUser.query.get(int(id))
 
 @users.route('/student/register', methods=['GET', 'POST'])
 def student_register():
@@ -81,8 +87,6 @@ def educator_register():
         educator = Educator(
                     id = user.id
                 )
-        db.session.add(educator)
-        
         # Commit to db
         db.session.add(educator)
         db.session.commit()
@@ -101,8 +105,15 @@ def login():
         user = BaseUser.query.filter(BaseUser.email==form.email.data).first()
 
         if user and user_manager.verify_password(form.password.data, user.password):
-            print('Hello {} {}'.format(user.firstname, user.lastname)) 
+            login_user(user)
+            return redirect(url_for('pages.educator_dashboard'))
         else:
             print('OOhh Nooo')
 
     return render_template('users/login.html', form=form)
+
+@users.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('users.login'))

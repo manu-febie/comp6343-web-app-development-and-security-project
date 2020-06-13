@@ -10,7 +10,7 @@ class Quiz(db.Model):
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean, default=False)
-    course = db.Column(db.Integer, db.ForeignKey('Course'))
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     # due_date_time = db.Column()
 
     # reference to questions

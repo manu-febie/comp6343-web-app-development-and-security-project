@@ -12,6 +12,9 @@
                 <form action="" method="post">
                     {{ form.csrf_token }}
                     <div class="input-field">
+                        {{ form.courses(class="browser-default") }}
+                    </div>
+                    <div class="input-field">
                         {{ form.name }}
                         {{ form.name.label() }}
                     </div>

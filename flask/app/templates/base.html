@@ -6,29 +6,32 @@
 
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Oxanium&display=swap" rel="stylesheet">
 
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    
+    {% if call_or_get(current_user.is_authenticated) %}
+    <!-- Nav for authenticated -->
 
+    {% else %}
+    <!-- Nav for unauthenticated users -->
     <nav class="blue lighten-2">
         <div class="nav-wrapper container">
-            <a href="{{ url_for('pages.index') }}" class="brand-logo">Quiz</a>
+            <a href="{{ url_for('pages.index') }}" class="brand-logo">DoUKnw</a>
             <ul class="right hide-on-med-and-down">
-                {% if call_or_get(current_user.is_authenticated) %}
-                <li><a href="">{{ current_user.email }}</a></li>
-                {% else %}
-                <li><a href="">Docs</a></li>
+                <li><a href="{{ url_for('pages.docs') }}">Docs</a></li>
                 <li><a href="{{ url_for('users.student_register') }}">Students</a></li>
                 <li><a href="{{ url_for('users.educator_register') }}">Educators</a></li>
                 <li><a href="{{ url_for('users.login') }}">Login</a></li>
-
-                {% endif %}
             </ul>
         </div>
     </nav>
+    {% endif %}
     
     <div class="container">
     {% block body %} 
@@ -37,5 +40,7 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 </body>
 </html>
