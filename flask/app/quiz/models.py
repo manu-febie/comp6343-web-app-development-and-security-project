@@ -10,12 +10,13 @@ class Quiz(db.Model):
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean, default=False)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    #course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    
     # due_date_time = db.Column()
 
     # reference to questions
     questions = db.relationship('Question', backref='quiz', lazy='dynamic')
-    
+     
     def __str__(self):
         return self.name
 
@@ -31,8 +32,8 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.Text, nullable=False)
     weight = db.Column(db.Integer, nullable=False)
-    question_id = db.Column(db.Integer, db.ForeignKey('quiz.id'))
-
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id', ondelete='CASCADE'))
+    
     # reference to the answers
     multiple_choice_answers = db.relationship('MultipleChoiceAnswer', backref='question', lazy='dynamic')
 

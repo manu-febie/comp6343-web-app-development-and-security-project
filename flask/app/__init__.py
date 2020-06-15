@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 # Configs
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://db_user:password@mysql-quiz-db.cwlufssxaaja.us-east-1.rds.amazonaws.com:3306/aws_quizdb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = False
@@ -38,22 +38,23 @@ app.config['USER_ENABLE_EMAIL'] = False
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 mail = Mail(app)
-#migrate = Migrate(app, db)
 
 # import models
-from app.users.models import BaseUser, Role, UserRoles, Student, Educator
+from app.users.models import User, Student
 from app.schools.models import School
-from app.courses.models import ClassCode, Course, CourseEnrollment, EducatorCourses
 
 # setup Flask-User
-user_manager = UserManager(app, db, BaseUser)
-#db_adapter = SQLAlchemyAdapter(db, BaseUser)
+user_manager = UserManager(app, db, User)
 
 # blueprints
+from app.courses.routes import courses
 from app.pages.routes import pages
+from app.schools.routes import schools
 from app.users.routes import users
 from app.quiz.routes import quiz
 
+app.register_blueprint(courses)
 app.register_blueprint(pages)
+app.register_blueprint(schools)
 app.register_blueprint(users)
 app.register_blueprint(quiz)
