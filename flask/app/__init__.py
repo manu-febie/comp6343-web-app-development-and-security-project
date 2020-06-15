@@ -39,7 +39,10 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 mail = Mail(app)
 
+login_manager.login_view = 'users.login'
+
 # import models
+from app.courses.models import ClassCode, Course, ClassCourses
 from app.users.models import User, Student
 from app.schools.models import School
 

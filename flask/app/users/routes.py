@@ -1,8 +1,9 @@
 from app import db, user_manager, login_manager
-from flask import Blueprint, render_template, url_for, redirect
-from flask_login import login_user, logout_user, login_required
+from flask import Blueprint, render_template, url_for, redirect, flash
+from flask_login import login_user, logout_user, login_required, current_user
 from app.users.models import User, Student
-from app.users.forms import UserLoginForm, UserRegisterForm
+from app.schools.models import School
+from app.users.forms import UserLoginForm, UserRegisterForm, UserUpdateForm
 
 users = Blueprint('users', __name__)
 
@@ -52,7 +53,27 @@ def educator_register():
 
 @users.route('/u/update', methods=['GET', 'POST'])
 def user_update():
-    return render_template('user_update.html')
+    form = UserUpdateForm()
+    school_list = School.query.all()
+    # loop through all schools
+    form.school.choices = [(school.id, school.name) for school in school_list]
+    
+    # Display current user data
+    form.firstname.data = current_user.firstname
+    form.lastname.data = current_user.lastname
+    form.email.data = current_user.email
+    
+    if form.validate_on_submit():
+        current_user.firstname = form.firstname.data
+        current_user.lastname = form.lastname.data
+        current_user.email = form.email.data
+        current_user.school_id = form.school.data
+        
+        db.session.commit()
+
+        flash('Your profile has been updated')
+
+    return render_template('users/user_update.html', form=form)
 
 # login route
 @users.route('/login', methods=['GET', 'POST'])

@@ -3,4 +3,53 @@
 {% block title %}Update profile{% endblock title %}
 
 {% block body %}
+
+<section class="section">
+    <div class="row">
+        <div class="col l12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Profile</span>
+                    <h6>{{ current_user.firstname }} {{ current_user.lastname }}</h6>
+                    <h6>{{ current_user.email }}</h6>
+                    <h6>member since {{ current_user.joined }}</h6>
+                    {% if current_user.school.name %}
+                    <h6>Educator at {{ current_user.school.name }}</h6>
+                    {% else %}
+                    <h6>No school added yet!</h6>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col l12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Update profile</span>
+                    <form action="" method="post">
+                        {{ form.csrf_token }}
+                        <div class="input-field">
+                            {{ form.firstname }}
+                            {{ form.firstname.label() }}
+                        </div>
+                        <div class="input-field">
+                            {{ form.lastname }}
+                            {{ form.lastname.label() }}
+                        </div>
+                        <div class="input-field">
+                            {{ form.email }}
+                            {{ form.email.label() }}
+                        </div>
+                        <div class="input-field">
+                            {{ form.school(class="browser-default") }}
+                        </div>
+                        <div class="input-field">
+                            {{ form.submit(class="light-blue darken-4 btn") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock body %}

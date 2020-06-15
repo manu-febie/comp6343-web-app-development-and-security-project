@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% block body %}
+
+<section class="section">
+    <div class="row">
+        <div class="col l12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">New course</span>
+                    <form action="" method="post">
+                        {{ form.csrf_token }}
+                        <div class="input-field">
+                            {{ form.name }}
+                            {{ form.name.label() }}
+                        </div>
+                        <div class="input-field">
+                            {{ form.course_code }}
+                            {{ form.course_code.label() }}
+                        </div>
+                        <div class="input-field">
+                            {{ form.classes(class="multiple browser-default", multiple=True) }}
+                        </div>
+                        <div class="input-field">
+                            {{ form.submit(class="light-blue darken-4 btn") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock body %}

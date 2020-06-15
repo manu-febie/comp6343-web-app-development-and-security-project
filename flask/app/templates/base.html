@@ -7,11 +7,14 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inconsolata:wght@300&family=Patrick+Hand&family=Space+Mono&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap" rel="stylesheet"> 
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body class="grey lighten-5">
@@ -22,12 +25,26 @@
     <div class="">
         <nav class="transparent">
             <div class="nav-wrapper container">
-                <ul>
-                    <li><a href="{{ url_for('users.logout') }}" class="grey-text text-darken-4">Logout</a></li>
+                <a href="{{ url_for('pages.educator_dashboard') }}" class="brand-logo" style="color:#01579b">DoUKnw</a>
+                <ul class="right">
+                    <li><a href="{{ url_for('users.user_update') }}"><i class="material-icons blue-text">account_circle</i></a></li>
+                    <li><a href="" class="grey-text text-darken-4">Hi, {{ current_user.firstname }}</a></li>
+                    <li><a href="{{ url_for('users.logout') }}" class="grey-text text-darken-4">
+                            Logout
+                        </a></li>
                 </ul>
             </div>
         </nav>
     </div>
+    
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <p class="center-align">{{ message }}</p> 
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
     {% else %}
     <!-- Nav for unauthenticated users -->
@@ -35,6 +52,9 @@
         <div class="nav-wrapper container">
             <a href="{{ url_for('pages.index') }}" class="brand-logo">DoUKnw</a>
             <ul class="right hide-on-med-and-down">
+                <li>
+                    <a href="https://github.com/imanuelfebie/comp6343-web-app-development-and-security-project/tree/master/flask/app" class="waves-effect waves-light blue lighten-5 blue-text text-darken-4 btn">Github</a>
+                </li>
                 <li><a href="{{ url_for('pages.docs') }}">Docs</a></li>
                 <li><a href="{{ url_for('users.student_register') }}">Students</a></li>
                 <li><a href="{{ url_for('users.educator_register') }}">Educators</a></li>

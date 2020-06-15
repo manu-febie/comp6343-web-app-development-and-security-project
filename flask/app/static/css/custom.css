@@ -1,8 +1,13 @@
 body {
-    font-family: 'Inconsolata', monospace;
+    font-family: 'Noto Sans TC', sans-serif;
     letter-spacing: 0.8px;
 }
 
 .brand-logo {
     font-family: 'Caveat', cursive;
+}
+
+.card-content-height {
+    height: 250px;
+    overflow: hidden;
 }
