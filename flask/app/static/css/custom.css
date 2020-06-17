@@ -3,6 +3,10 @@ body {
     letter-spacing: 0.8px;
 }
 
+/***
+ * Overwrite Materialize CSS
+ ***/
+
 .brand-logo {
     font-family: 'Caveat', cursive;
 }
@@ -10,4 +14,9 @@ body {
 .card-content-height {
     height: 250px;
     overflow: hidden;
+}
+
+nav {
+    /* Overwrite box-shadow to none */
+    box-shadow: none;
 }

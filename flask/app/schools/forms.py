@@ -7,3 +7,8 @@ class SchoolRegisterForm(FlaskForm):
     submit = SubmitField('submit')
 
 
+class SchoolChoicesForm(FlaskForm):
+    school_choice = SelectField('school', coerce=int)
+    submit = SubmitField('submit')
+
+

@@ -8,9 +8,9 @@ from app.users.forms import UserLoginForm, UserRegisterForm, UserUpdateForm
 users = Blueprint('users', __name__)
 
 # user loader
-@login_manager.user_loader
-def load_user(id):
-    return BaseUser.query.get(int(id))
+# @login_manager.user_loader
+# def load_user(id):
+#     return BaseUser.query.get(int(id))
 
 @users.route('/student/register', methods=['GET', 'POST'])
 def student_register():
@@ -47,7 +47,10 @@ def educator_register():
                 )
         db.session.add(user)
         db.session.commit()
-        print(f'{user.email} has been added')
+
+        flash('Great! You can login with your email now')
+
+        return redirect(url_for('users.login'))
     
     return render_template('/users/register_educator.html', form=form)
 
@@ -87,8 +90,11 @@ def login():
         if user and user_manager.verify_password(form.password.data, user.password):
             if user.is_educator:
                 login_user(user)
-                return redirect(url_for('pages.educator_dashboard'))
-                print(f'Welcome {user.email}')
+
+                if user.school_id == None:
+                    return redirect(url_for('schools.school_user_choose'))
+                else: 
+                    return redirect(url_for('pages.educator_dashboard'))
         else:
             print('OOhh Nooo')
 

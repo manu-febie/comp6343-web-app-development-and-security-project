@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock title %}
+
+{% include 'includes/nav.html' %}
+
+{% block body %}
+<section class="section">
+    <div class="row">
+        <div class="col l3 hide-on-med-and-down">
+            <div class="card">
+                <ul class="collection">
+                    <li class="collection-item"><a href="{{ url_for('quiz.quiz_create') }}" class="purple-text accent-4">Create Quiz</a></li>
+                    <li class="collection-item"><a href="" class="purple-text">Protests</a></a></li>
+                    <li class="collection-item"><a href="" class="purple-text">Drafts</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col l9 m12 s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Overview</span>
+                    {% if quiz_list %}
+                    <table class="responsive-table highlight">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>Class</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for quiz in quiz_list %}
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    Wow, such empty
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock body %}

@@ -30,3 +30,13 @@ class Student(db.Model):
     '''
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     student_id = db.Column(db.String(20), unique=True, nullable=False)
+
+
+class QuizEnrollment(db.Model):
+    '''
+    Table to know if student has finished quiz
+    '''
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.id', ondelete='CASCADE'))
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id', ondelete='CASCADE'))
+

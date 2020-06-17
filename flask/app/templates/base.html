@@ -19,51 +19,14 @@
 </head>
 <body class="grey lighten-5">
     
-    {% if call_or_get(current_user.is_authenticated) %}
-    <!-- Nav for authenticated -->
-    
-    <div class="">
-        <nav class="transparent">
-            <div class="nav-wrapper container">
-                <a href="{{ url_for('pages.educator_dashboard') }}" class="brand-logo" style="color:#01579b">DoUKnw</a>
-                <ul class="right">
-                    <li><a href="{{ url_for('users.user_update') }}"><i class="material-icons blue-text">account_circle</i></a></li>
-                    <li><a href="" class="grey-text text-darken-4">Hi, {{ current_user.firstname }}</a></li>
-                    <li><a href="{{ url_for('users.logout') }}" class="grey-text text-darken-4">
-                            Logout
-                        </a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    
-    <!-- Flash messages -->
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-            <p class="center-align">{{ message }}</p> 
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    {% else %}
-    <!-- Nav for unauthenticated users -->
-    <nav class="blue darken-2">
-        <div class="nav-wrapper container">
-            <a href="{{ url_for('pages.index') }}" class="brand-logo">DoUKnw</a>
-            <ul class="right hide-on-med-and-down">
-                <li>
-                    <a href="https://github.com/imanuelfebie/comp6343-web-app-development-and-security-project/tree/master/flask/app" class="waves-effect waves-light blue lighten-5 blue-text text-darken-4 btn">Github</a>
-                </li>
-                <li><a href="{{ url_for('pages.docs') }}">Docs</a></li>
-                <li><a href="{{ url_for('users.student_register') }}">Students</a></li>
-                <li><a href="{{ url_for('users.educator_register') }}">Educators</a></li>
-                <li><a href="{{ url_for('users.login') }}">Login</a></li>
-            </ul>
-        </div>
-    </nav>
+    {% if messages %}
+        {% for message in messages %}
+        <p class="center-align"><i class="tiny material-icons">done</i> {{ message }}</p>
+        {% endfor %}
     {% endif %}
-    
+    {% endwith %}       
+
     <div class="container">
     {% block body %} 
     {% endblock body %}
@@ -73,5 +36,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Jquery CDN -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+    <script src="../static/js/custom.js"></script>
 </body>
 </html>

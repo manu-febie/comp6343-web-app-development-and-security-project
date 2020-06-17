@@ -2,29 +2,64 @@
 
 {% block title %}Create quiz{% endblock title %}
 
+{% include 'includes/nav.html' %}
+
 {% block body %}
 
 <div class="row section">
-    <div class="col l8 offset-l2">
+    <div class="col l12 s12">
         <div class="card">
             <div class="card-content">
                 <span class="card-title">Create a new quiz</span>
                 <form action="" method="post">
                     {{ form.csrf_token }}
-                    <div class="input-field">
-                        {{ form.courses(class="browser-default") }}
-                    </div>
+                    <!-- Quiz -->
                     <div class="input-field">
                         {{ form.name }}
                         {{ form.name.label() }}
                     </div>
                     <div class="input-field">
-                        {{ form.description }}
+                        {{ form.description(class="materialize-textarea") }}
                         {{ form.description.label() }}
                     </div>
                     <div class="input-field">
-                        {{ form.submit(class="btn") }}
+                        {{ form.course(class="browser-default") }}
                     </div>
+                    <div class="input-field">
+                        {{ form.due_date }}
+                        {{ form.due_date.label() }}
+                    </div>
+                    <div class="right-align">
+                    <label for="draft">
+                        {{ form.draft }}
+                        <span>Draft</span>
+                    </label>
+                    </div>
+                </div>
+            </div>
+                    
+            <div class="card">
+                <div class="card-content">
+                    <!-- Questions -->
+                    <span class="card-title">Question </span>
+                       <div class="input-field dynamic-field">
+                       {{ form.question.question }}
+                       {{ form.question.label() }}
+                       </div>
+                       <div class="input-field right-align">
+                       <a href="javascript:void(0)" class="add-button btn-flat grey lighten-5 purple-accent-4">Add</a>     
+                       </div>
+                    </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Create the quiz</span>
+                    <div class="input-field right-align">
+                        {{ form.submit(class="btn-flat btn-small purple accent-4 white-text") }}
+                    </div>
+                </div>
+            </div>
                 </form>
             </div>
         </div>

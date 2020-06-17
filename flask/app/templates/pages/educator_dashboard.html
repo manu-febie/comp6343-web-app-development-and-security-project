@@ -2,6 +2,8 @@
 
 {% block title %}Dashboard{% endblock %}
 
+{% include 'includes/nav.html' %}
+
 {% block body %}
 
 <div class="section">
@@ -27,15 +29,15 @@
                     <p>Wow, such empty</p>
                     {% endif %}
                 </div>
-                <div class="card-action">
-                    <a href="{{ url_for('courses.class_create') }}" class="blue-text text-darken-2">Class Management</a>
+                <div class="card-action purple accent-4">
+                    <a href="{{ url_for('courses.class_list') }}" class="white-text">Class Management</a>
                 </div>
             </div>
         </div>
         <div class="col l4 s12">
             <div class="card">
                 <div class="card-content card-content-height">
-                    <span class="card-title">My Courses {{ course_list.sum }}<br>
+                    <span class="card-title">My Courses<br>
                         <small>@{{ current_user.school.name }}</small>
                     </span>
                     {% if course_list %}
@@ -44,7 +46,7 @@
                         <tbody>
                         {% for course in course_list %}
                         <tr>
-                            <td>{{ course.name|truncate }}</td>
+                            <td>{{ course.name|truncate(20) }}</td>
                             <td>{{ course.course_code }}</td>
                         </tr>
                         {% endfor %}
@@ -55,8 +57,8 @@
                     <p>Nothing here yet</p>
                     {% endif %}
                 </div>
-                <div class="card-action">
-                    <a href="{{ url_for('courses.course_create') }}" class="blue-text text-darken-2">Course Management</a>
+                <div class="card-action purple accent-4">
+                    <a href="{{ url_for('courses.course_list') }}" class="white-text">Course Management</a>
                 </div>
             </div>
         </div>
@@ -69,8 +71,8 @@
                     <p>Nothing here yet</p>
                     {% endif %}
                 </div>
-                <div class="card-action">
-                    <a href="" class="blue-text text-darken-2">Quiz Management</a>
+                <div class="card-action purple accent-4">
+                    <a href="{{ url_for('quiz.quiz_list') }}" class="white-text">Quiz Management</a>
                 </div>
             </div>
         </div>

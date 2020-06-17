@@ -10,11 +10,11 @@ class Quiz(db.Model):
     name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean, default=False)
-    #course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
-    
-    # due_date_time = db.Column()
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    due_date_time = db.Column(db.DateTime())
+    is_draft = db.Column(db.Boolean, default=True)
 
-    # reference to questions
+    classes = db.relationship('ClassCode', 'quiz_class', backref='quiz', lazy='dynamic')
     questions = db.relationship('Question', backref='quiz', lazy='dynamic')
      
     def __str__(self):
@@ -48,3 +48,12 @@ class MultipleChoiceAnswer(db.Model):
     text = db.Column(db.Text, nullable=False)
     correct = db.Column(db.Boolean, default=False)
     question_id = db.Column(db.Integer, db.ForeignKey('question.id'))
+
+
+class QuizClass(db.Model):
+    '''
+    '''
+    id = db.Column(db.Integer, primary_key=True)
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id', ondelete='CASCADE'))
+    class_id = db.Column(db.Integer, db.ForeignKey('class_code.id', ondelete='CASCADE'))
+

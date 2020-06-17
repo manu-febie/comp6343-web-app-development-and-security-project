@@ -2,6 +2,7 @@
 
 {% block title %}Class create{% endblock title %}
 
+{% include 'includes/nav.html' %}
 {% block body %}
 
 <section class="section">
@@ -16,10 +17,8 @@
                             {{ form.class_code }}
                             {{ form.class_code.label() }}
                         </div>
-                        <div class="input-field">
-                        </div>
-                        <div class="input-field">
-                            {{ form.submit(class="btn light-blue darken-4") }}
+                        <div class="input-field right-align">
+                            {{ form.submit(class="btn-flat btn-small purple accent-4 white-text") }}
                         </div>
                     </form>
                 </div>

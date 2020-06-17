@@ -2,6 +2,8 @@
 
 {% block title %}{% endblock title %}
 
+{% include 'includes/nav.html' %}
+
 {% block body %}
 
 <section class="section">
@@ -23,8 +25,8 @@
                         <div class="input-field">
                             {{ form.classes(class="multiple browser-default", multiple=True) }}
                         </div>
-                        <div class="input-field">
-                            {{ form.submit(class="light-blue darken-4 btn") }}
+                        <div class="input-field right-align">
+                            {{ form.submit(class="btn-flat btn-small purple accent-4 white-text") }}
                         </div>
                     </form>
                 </div>

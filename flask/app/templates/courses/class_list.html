@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ current_user.firstname }} {{ current_user.lastname }} | Class Management{% endblock title %}
+
+{% include 'includes/nav.html' %}
+
+{% block body %}
+
+<section class="section">
+    
+    <div class="row">
+        <div class="col l3 s12">
+            <ul class="collection">
+                <li class="collection-item"><a href="{{ url_for('courses.class_create') }}" class="purple-text">Create</a></li>
+                <li class="collection-item"><a href="" class="purple-text">Students</a></li>
+            </ul>
+        </div>
+        <div class="col l9 s2">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Class Management</span>
+
+                    {% if class_list %}
+                    <table class="responsive-table highlight">
+                        <thead>
+                            <tr>
+                                <th>Class Code</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for class in class_list %}
+                            <tr>
+                                <td>{{ class.name }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p>Wow, such empty</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+
+{% endblock body %}

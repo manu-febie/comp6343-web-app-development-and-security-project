@@ -1,0 +1,35 @@
+{% if call_or_get(current_user.is_authenticated) %}
+<!-- Nav for authenticated -->
+
+<div class="">
+    <nav class="transparent">
+        <div class="nav-wrapper container">
+            <a href="{{ url_for('pages.educator_dashboard') }}" class="brand-logo" style="color:#aa00ff">
+                DoUKnw
+            </a>
+            <ul class="right">
+                <li><a href="{{ url_for('users.user_update') }}"><i class="material-icons purple-text text-accent-4">account_circle</i></a></li>
+                <li><a href="" class="grey-text text-darken-4">Hi, {{ current_user.firstname }}</a></li>
+                <li><a href="{{ url_for('users.logout') }}" class="grey-text text-darken-4">
+                        Logout
+                    </a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+{% else %}
+<nav class="purple accent-4">
+    <div class="nav-wrapper container">
+        <a href="{{ url_for('pages.index') }}" class="brand-logo">DoUKnw</a>
+        <ul class="right hide-on-med-and-down">
+            <li>
+                <a href="https://github.com/imanuelfebie/comp6343-web-app-development-and-security-project/tree/master/flask/app" class="waves-effect waves-light white purple-text btn-small">Github</a>
+           </li>
+            <li><a href="{{ url_for('users.student_register') }}">Students</a></li>
+            <li><a href="{{ url_for('users.educator_register') }}">Educators</a></li>
+            <li><a href="{{ url_for('users.login') }}">Login</a></li>
+        </ul>
+    </div>
+</nav>
+{% endif %}
