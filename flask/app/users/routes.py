@@ -7,10 +7,9 @@ from app.users.forms import UserLoginForm, UserRegisterForm, UserUpdateForm
 
 users = Blueprint('users', __name__)
 
-# user loader
-# @login_manager.user_loader
-# def load_user(id):
-#     return BaseUser.query.get(int(id))
+@login_manager.user_loader
+def load_user(id):
+    return BaseUser.query.get(int(id))
 
 @users.route('/student/register', methods=['GET', 'POST'])
 def student_register():
@@ -29,7 +28,8 @@ def student_register():
         # add and commit to db
         db.session.add(user)
         db.session.commit()
-        print(f'{user.email} has been added')
+
+        flash(f'Great! You can login with your email ({form.email}) now')
             
     return render_template('users/register_student.html', form=form)
 
@@ -57,9 +57,6 @@ def educator_register():
 @users.route('/u/update', methods=['GET', 'POST'])
 def user_update():
     form = UserUpdateForm()
-    school_list = School.query.all()
-    # loop through all schools
-    form.school.choices = [(school.id, school.name) for school in school_list]
     
     # Display current user data
     form.firstname.data = current_user.firstname
@@ -70,11 +67,12 @@ def user_update():
         current_user.firstname = form.firstname.data
         current_user.lastname = form.lastname.data
         current_user.email = form.email.data
-        current_user.school_id = form.school.data
         
         db.session.commit()
 
         flash('Your profile has been updated')
+    else:
+        print('Oh nono')
 
     return render_template('users/user_update.html', form=form)
 
@@ -88,13 +86,13 @@ def login():
         user = User.query.filter(User.email==form.email.data).first()
 
         if user and user_manager.verify_password(form.password.data, user.password):
-            if user.is_educator:
-                login_user(user)
+            
+            login_user(user)
 
-                if user.school_id == None:
-                    return redirect(url_for('schools.school_user_choose'))
-                else: 
-                    return redirect(url_for('pages.educator_dashboard'))
+            if user.school_id == None:
+                return redirect(url_for('schools.school_user_choose'))
+            else: 
+                return redirect(url_for('pages.educator_dashboard'))
         else:
             print('OOhh Nooo')
 

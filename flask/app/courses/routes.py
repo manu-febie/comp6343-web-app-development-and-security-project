@@ -74,3 +74,23 @@ def course_create():
         return redirect(url_for('pages.educator_dashboard'))
 
     return render_template('courses/create.html', form=form)
+
+@courses.route('/<name>/join-class', methods=['GET', 'POST'])
+@login_required
+def student_class_join(name):
+    
+    return render_template('courses/student_join_class.html', form=form)
+
+
+
+
+
+
+
+
+
+
+
+
+
+

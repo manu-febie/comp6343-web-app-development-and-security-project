@@ -6,8 +6,9 @@
         <div class="nav-wrapper container">
             <a href="{{ url_for('pages.educator_dashboard') }}" class="brand-logo" style="color:#aa00ff">DoUKnw</a>
             <ul class="right">
-                <li><a href="{{ url_for('users.user_update') }}"><i class="material-icons purple-text text-accent-4">account_circle</i></a></li>
-                <li><a href="" class="grey-text text-darken-4">Hi, {{ current_user.firstname }}</a></li>
+                <li><a href="{{ url_for('users.user_update') }}" class="grey-text text-darken-4">
+                        <i class="material-icons purple-text left">account_circle</i>Hi, {{ current_user.firstname }}
+                </a></li>
                 <li><a href="{{ url_for('users.logout') }}" class="grey-text text-darken-4">
                         Logout
                     </a></li>
@@ -24,6 +25,7 @@
             <li>
                 <a href="https://github.com/imanuelfebie/comp6343-web-app-development-and-security-project/tree/master/flask/app" class="waves-effect waves-light white purple-text btn-small">Github</a>
            </li>
+           <li><a href="{{ url_for('pages.docs') }}">Docs</a></li>
             <li><a href="{{ url_for('users.student_register') }}">Students</a></li>
             <li><a href="{{ url_for('users.educator_register') }}">Educators</a></li>
             <li><a href="{{ url_for('users.login') }}">Login</a></li>

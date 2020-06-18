@@ -45,6 +45,7 @@ login_manager.login_view = 'users.login'
 from app.courses.models import ClassCode, Course, ClassCourses
 from app.users.models import User, Student
 from app.schools.models import School
+from app.quiz.models import Quiz
 
 # setup Flask-User
 user_manager = UserManager(app, db, User)

@@ -9,6 +9,7 @@
 <div class="section">
 
     <div class="row"> 
+        {% if current_user.is_educator %}
         <!-- class  -->
         <div class="col l4 s12">
             <div class="card">
@@ -76,6 +77,73 @@
                 </div>
             </div>
         </div>
+        {% else %}
+
+        <!-- Student cards -->
+       
+        <div class="col l4 s12">
+            <div class="card">
+                <div class="card-content card-content-height">
+                    <span class="card-title">Class</span>
+                    {% if not current_user.class_code_id %}
+                        Wow, such empty. Join a class to fix this.
+                    {% else %}
+                    {% endif %}
+                </div>
+                <div class="card-action purple accent-4 white-text right-align">
+                    {% if not current_user.class_code_id %}
+                        <a href="" class="btn-small waves-effect waves-dark white purple-text pulse">
+                            <i class="material-icons left">notifications</i>Join class
+                        </a>
+                    {% else %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <!--  -->
+        <div class="col l4 s12">
+            <div class="card">
+                <div class="card-content card-content-height">
+                    <span class="card-title">Course Enrollments</span>
+                    {% if not current_user.class_code_id %}
+                        Join a class, to see the courses you are enrolled in. 
+                    {% else %}
+                
+                    {% endif %}
+                </div>
+                <div class="card-action purple accent-4 white-text">
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendar -->
+        <div class="col l4 s12">
+            <div class="card">
+                <div class="card-content card-content-height">
+                    <span class="card-title">Upcoming Tests</span>
+                    Quizzes will be displayed here.
+                </div>
+                <div class="card-action purple accent-4 white-text">
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!--
+        <div class="col l12 m12 s12">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">History</span>
+                    
+                </div>
+                <div class="card-action">
+                </div>
+            </div>
+        </div>
         
         <div class="col l12 s12">
             <div class="card">
@@ -84,6 +152,7 @@
                 </div>
             </div>
         </div>
+        -->
         
     </div>
 

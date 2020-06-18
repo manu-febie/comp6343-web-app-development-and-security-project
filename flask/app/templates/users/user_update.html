@@ -15,10 +15,10 @@
                     <h6>{{ current_user.firstname }} {{ current_user.lastname }}</h6>
                     <h6>{{ current_user.email }}</h6>
                     <h6>member since {{ current_user.joined }}</h6>
-                    {% if current_user.school.name %}
+                    {% if current_user.is_educator %}
                     <h6>Educator at {{ current_user.school.name }}</h6>
                     {% else %}
-                    <h6>No school added yet!</h6>
+                    <h6>Student at {{ current_user.school.name }}</h6>
                     {% endif %}
                 </div>
             </div>
@@ -41,12 +41,10 @@
                             {{ form.email }}
                             {{ form.email.label() }}
                         </div>
-                        <div class="input-field">
-                            {{ form.school(class="browser-default") }}
-                        </div>
                         <div class="input-field right-align">
                             {{ form.submit(class="btn-flat btn-small purple accent-4 white-text") }}
                         </div>
+                        
                     </form>
                 </div>
             </div>

@@ -16,7 +16,6 @@ class UserUpdateForm(FlaskForm):
     firstname = StringField('firstname')
     lastname = StringField('lastname')
     email = StringField('email', validators=[Email()])
-    school = SelectField('school', coerce=int)
     submit = SubmitField('update')
      
 

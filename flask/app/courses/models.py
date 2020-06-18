@@ -5,7 +5,9 @@ class ClassCode(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(10), nullable=False)
     school_id = db.Column(db.Integer, db.ForeignKey('school.id', ondelete='CASCADE'))
+    
     courses = db.relationship('Course', 'class_courses', backref='class_code', lazy='dynamic')
+    users = db.relationship('User', backref='class_code', lazy='dynamic')
     
     def __str__(self):
         return self.name

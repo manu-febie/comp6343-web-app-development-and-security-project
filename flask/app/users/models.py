@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     is_active = db.Column(db.Boolean, nullable=False, server_default='1')
     joined = db.Column(db.DateTime, default=datetime.utcnow())
     school_id = db.Column(db.Integer, db.ForeignKey('school.id', ondelete='CASCADE'))
+    class_code_id = db.Column(db.Integer, db.ForeignKey('class_code.id', ondelete='CASCADE'))
 
     def __str__(self):
         return f'User <{self.firstname} {self.lastname}>'

@@ -19,7 +19,7 @@ def index():
 def docs():
     return render_template('pages/docs.html')
 
-@pages.route('/e/dashboard')
+@pages.route('/dashboard')
 @login_required
 def educator_dashboard():
     '''

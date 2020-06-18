@@ -2,6 +2,7 @@
 
 {% block title %}Register as student{% endblock title %}
 
+{% include 'includes/nav.html' %}
 {% block body %}
 
 <div class="row section">
@@ -43,13 +44,13 @@
                         {{ form.password2 }}
                         {{ form.password2.label() }}
                     </div>
-                    <div class="input-field">
-                        {{ form.submit(class="btn blue lighten-2") }}
+                    <div class="input-field right-align">
+                        {{ form.submit(class="btn-flat btn-small purple accent-4 white-text") }}
                     </div>
                 </form>
             </div>
-            <div class="card-action">
-                Already an account? <a href="#" class="blue-text">Login</a>
+            <div class="card-action purple accent-4 white-text">
+                Already an account? <a href="#" class="btn-small white purple-text">Login</a>
             </div>
         </div>
     </div>

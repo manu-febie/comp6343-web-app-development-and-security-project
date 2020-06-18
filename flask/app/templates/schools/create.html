@@ -9,7 +9,11 @@
         <div class="col l10 offset-l1">
             <div class="card"h>
                 <div class="card-content">
+                    {% if current_user.is_educator %}
                     <span class="card-title">Where do you teach?</span>
+                    {% elif current_user.is_student %}
+                    <span class="card-title">Where do you go to school?</span>
+                    {% endif %}
                     <form action="" method="post">
                         {{ form.csrf_token }}
                         <div class="input-field">
