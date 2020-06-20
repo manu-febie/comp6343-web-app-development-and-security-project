@@ -1,27 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'base_form.html' %}
 
 {% block title %}Register as educator{% endblock title %}
 
-{% include 'includes/nav.html' %}
-
 {% block body %}
 
-<div class="row section">
-    <div class="col l4 hide-on-med-and-down section">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">Not yet registered?</span>
-                QuizDown provides an easy to user interface for educators and students. See who makes use QuizIt.
-            </div>
-            <div class="card-action">
-                <a href="" class="purple-text">Learn more</a>
+<div class="row">
+    <div class="col l6 l-side">
+        <div class="section">
+            <div class="container center-align white-text">
+                <h1 class="brand-logo">DoUKnw</h1>
+                <p>Learn more. Read the <a href="{{ url_for('pages.docs') }}" class="btn-flat btn-small white purple-text">docs</a></p>
             </div>
         </div>
     </div>
-    <div class="col l8 m12 section">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">Register as an educator</span>
+    <div class="col l6 m12">
+        <div class="section">
+            <div class="container">
+                <h4 class="purple-text">Student registration</h4>
+                <p>Do you teach? Register as educator <a href="{{ url_for('users.educator_register') }}" class="purple-text">here</a></p>
                 <form action="" method="post">
                     {{ form.csrf_token }}
 
@@ -48,10 +44,8 @@
                     <div class="input-field right-align">
                         {{ form.submit(class="btn-flat purple accent-4 white-text right-align") }}
                     </div>
+                    <p>Already an account? Login <a href="{{ url_for('users.login') }}" class="purple-text">here</a>.</p>
                 </form>
-            </div>
-            <div class="card-action purple accent-4 white-text">
-                Already an account? <a href="#" class="btn-small btn-flat white purple-text text-accent-4">Login</a>
             </div>
         </div>
     </div>

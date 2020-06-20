@@ -11,6 +11,11 @@ users = Blueprint('users', __name__)
 def load_user(id):
     return BaseUser.query.get(int(id))
 
+@login_manager.unauthorized_handler
+def handle_needs_login():
+    flash('Authentication is required!')
+    return redirect(url_for('users.login', next=request.endpoint))
+
 @users.route('/student/register', methods=['GET', 'POST'])
 def student_register():
     # load form

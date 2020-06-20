@@ -5,21 +5,11 @@ from app.quiz.models import Quiz
 
 pages = Blueprint('pages', __name__)
 
-@pages.route('/')
-def index():
-    '''
-    Pages route that returns the homepage of the web app
-
-    :return: homepage
-    '''
-
-    return render_template('index.html')
-
 @pages.route('/docs')
 def docs():
     return render_template('pages/docs.html')
 
-@pages.route('/dashboard')
+@pages.route('/')
 @login_required
 def educator_dashboard():
     '''

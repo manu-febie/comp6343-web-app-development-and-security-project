@@ -1,16 +1,25 @@
-{% extends 'base.html' %}
+{% extends 'base_form.html' %}
 
 {% block title %}Login{% endblock title %}
 
-{% include 'includes/nav.html' %}
-
 {% block body %}
 
-<div class="row section">
-    <div class="col l8 offset-l2">
-        <div class="card">
-            <div class="card-content">
-                <span class="card-title">Login</span>
+<div class="row">
+    <div class="col l6 l-side">
+        <div class="section">
+            <div class="container center-align white-text">
+                <h1 class="brand-logo">DoUKnw</h1>
+                <p>Learn more. Read the <a href="{{ url_for('pages.docs') }}" class="btn-flat btn-small white purple-text">docs</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col l6 r-side">
+        <div class="section">
+            <div class="container">
+                <p class="center-align">
+                <i class="material-icons large purple-text center-align">face</i>
+                </p>
+                <h4 class="purple-text">Hi</h4>
                 <form action="" method="post">
                     {{ form.csrf_token }}
                     <div class="input-field">
@@ -24,9 +33,9 @@
                     <div class="input-field right-align">
                         {{ form.submit(class="btn-flat purple accent-4 white-text")}}
                     </div>
+                    <p>New here? Register here as <a href="{{ url_for('users.student_register') }}" class="purple-text">student</a>
+                    or <a href="{{ url_for('users.educator_register') }}" class="purple-text">educator</a></p>
                 </form>
-            </div>
-            <div class="card-action">
             </div>
         </div>
     </div>

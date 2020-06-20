@@ -1,6 +1,31 @@
+html {
+    height: 100%;
+    position: relative;
+}
+
 body {
     font-family: 'Noto Sans TC', sans-serif;
     letter-spacing: 0.8px;
+    height: 100%;
+}
+
+/***
+ * Login page style
+ ***/
+
+.l-side, .r-side {
+    height: 100vh;
+    width: 100%;
+}
+
+.l-side {
+    background-color: #aa00ff;
+}
+
+.r-side {
+    min-height: 10em;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 /***

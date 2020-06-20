@@ -49,6 +49,7 @@ from app.quiz.models import Quiz
 
 # setup Flask-User
 user_manager = UserManager(app, db, User)
+#user_manager.login_view = 'users.login'
 
 # blueprints
 from app.courses.routes import courses
