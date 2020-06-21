@@ -1,9 +1,6 @@
 from flask import Flask
-from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_login import LoginManager
-from flask_mail import Mail
 from flask_marshmallow import Marshmallow
 from dotenv import load_dotenv
 
@@ -14,7 +11,6 @@ load_dotenv('.env')
 
 # Flask instance
 app = Flask(__name__)
-bc = Bcrypt(app)
 
 # Configs
 app.config['SECRET_KEY'] = '123456'
@@ -27,7 +23,6 @@ app.config['CSRF_ENABLED'] = True
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 ma = Marshmallow(app)
-mail = Mail(app)
 
 login_manager.login_view = 'users.login'
 login_manager.login_message = ''
@@ -37,8 +32,6 @@ from app.courses.models import ClassCode, Course, ClassCourses
 from app.users.models import User, Student
 from app.schools.models import School
 from app.quiz.models import Quiz
-
-
 
 # blueprints
 from app.courses.routes import courses

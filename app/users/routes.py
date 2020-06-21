@@ -1,11 +1,9 @@
-
-from flask_login import login_user, logout_user, login_required, current_user
-from app import db, bc, login_manager
-from flask import Blueprint, render_template, url_for, redirect, flash, request
+from app import db, login_manager
 from app.users.models import User, Student
 from app.schools.models import School
 from app.users.forms import UserLoginForm, UserRegisterForm, UserUpdateForm
-
+from flask_login import login_user, logout_user, login_required, current_user
+from flask import Blueprint, render_template, url_for, redirect, flash, request
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import bcrypt
