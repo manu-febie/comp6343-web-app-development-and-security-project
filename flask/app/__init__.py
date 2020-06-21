@@ -18,7 +18,7 @@ bc = Bcrypt(app)
 
 # Configs
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://db_user:password@mysql-quiz-db.cwlufssxaaja.us-east-1.rds.amazonaws.com:3306/aws_quizdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ(DB_URI)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = False

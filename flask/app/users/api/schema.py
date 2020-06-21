@@ -1,4 +1,5 @@
 from app import ma
+
 from app.users.models import User, Student, QuizEnrollment
 
 
