@@ -21,7 +21,7 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CSRF_ENABLED'] = True
-app.config['USER_ENABLE_EMAIL'] = False
+#app.config['USER_ENABLE_EMAIL'] = False
 
 # Database instance
 db = SQLAlchemy(app)
