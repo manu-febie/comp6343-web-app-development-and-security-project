@@ -19,19 +19,9 @@
 </head>
 <body class="grey lighten-5">
 
-    <!-- Flash messages -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-        <p class="center-align"><i class="tiny material-icons">done</i> {{ message }}</p>
-        {% endfor %}
-    {% endif %}
-    {% endwith %}       
-    <!-- End flash messages -->
-    
     {% block body %}
     {% endblock body %}
-
+    
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Jquery CDN -->

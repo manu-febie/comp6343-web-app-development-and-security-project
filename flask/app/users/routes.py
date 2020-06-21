@@ -1,15 +1,20 @@
-from app import db, user_manager, login_manager
-from flask import Blueprint, render_template, url_for, redirect, flash
+
 from flask_login import login_user, logout_user, login_required, current_user
+from app import db, bc, login_manager
+from flask import Blueprint, render_template, url_for, redirect, flash, request
 from app.users.models import User, Student
 from app.schools.models import School
 from app.users.forms import UserLoginForm, UserRegisterForm, UserUpdateForm
+
+from werkzeug.security import generate_password_hash, check_password_hash
+
+import bcrypt
 
 users = Blueprint('users', __name__)
 
 @login_manager.user_loader
 def load_user(id):
-    return BaseUser.query.get(int(id))
+    return User.query.get(int(id))
 
 @login_manager.unauthorized_handler
 def handle_needs_login():
@@ -28,13 +33,15 @@ def student_register():
                 firstname = form.firstname.data,
                 lastname = form.lastname.data,
                 email = form.email.data,
-                password = user_manager.hash_password(form.password1.data)
+                password = generate_password_hash(form.password1.data, "sha256")
                 )
         # add and commit to db
         db.session.add(user)
         db.session.commit()
 
-        flash(f'Great! You can login with your email ({form.email}) now')
+        flash(f'Great! You can login with your email {form.email.data} now')
+
+        return redirect(url_for('users.login'))
             
     return render_template('users/register_student.html', form=form)
 
@@ -48,7 +55,7 @@ def educator_register():
                 firstname = form.firstname.data,
                 lastname = form.lastname.data,
                 email = form.email.data,
-                password = user_manager.hash_password(form.password1.data)
+                password = generate_password_hash(form.password1.data, "sha256")
                 )
         db.session.add(user)
         db.session.commit()
@@ -90,7 +97,7 @@ def login():
         # Get user by email
         user = User.query.filter(User.email==form.email.data).first()
 
-        if user and user_manager.verify_password(form.password.data, user.password):
+        if user and check_password_hash(user.password, form.password.data):
             
             login_user(user)
 
@@ -98,8 +105,6 @@ def login():
                 return redirect(url_for('schools.school_user_choose'))
             else: 
                 return redirect(url_for('pages.educator_dashboard'))
-        else:
-            print('OOhh Nooo')
 
     return render_template('users/login.html', form=form)
 

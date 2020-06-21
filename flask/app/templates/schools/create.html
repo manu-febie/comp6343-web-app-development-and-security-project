@@ -1,32 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'base_form.html' %}
 
-{% block title %}{% endblock title %}
+{% block title %}Add school{% endblock title %}
 
 {% block body %}
 
-<section class="section">
-    <div class="row">
-        <div class="col l10 offset-l1">
-            <div class="card"h>
-                <div class="card-content">
-                    {% if current_user.is_educator %}
-                    <span class="card-title">Where do you teach?</span>
-                    {% elif current_user.is_student %}
-                    <span class="card-title">Where do you go to school?</span>
-                    {% endif %}
-                    <form action="" method="post">
-                        {{ form.csrf_token }}
-                        <div class="input-field">
-                            {{ form.school_choice(class="browser-default") }}
-                        </div>
-                        <div class="input-field right-align">
-                            {{ form.submit(class="btn-flat purple accent-4 white-text")}}
-                        </div>
-                    </form>
-                </div>
+<div class="row">
+    <div class="col l6 l-side">
+        <div class="section">
+            <div class="container center-align white-text">
+                <h1 class="brand-logo">DoUKnow</h1>
+                {% if current_user.is_educator %}
+                <p>for educators</p>
+                {% else %}
+                {% endif %}
             </div>
+        </div>  
+    </div>
+    <div class="col l6 r-side">
+        <div class="section">
+        <div class="container">
+            <h4 class="purple-text">Almost done!</h4>
+            {% if current_user.is_educator %}
+            <p class="">Hi {{ current_user.firstname }}. Since it's your first time here, we still need to know one thing. Can you tell us where you teach?</p>
+            {% else %}
+            <p class="">Hi {{ current_user.firstname }}. Since it's your first time here, we still need to know one thing. Can you tell us where you go to school?</p>
+            {% endif %}
+            <form action="" method="post">
+                {{ form.csrf_token }}
+                <div class="input-field">
+                    {{ form.school_choice(class="browser-default") }}
+                </div>
+                <div class="input-field right-align">
+                    {{ form.submit(class="btn-flat btn-small purple accent-4 white-text") }}
+                </div>
+            </form>
+        </div>
         </div>
     </div>
-</section>
+</div>
 
 {% endblock body %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Join Class{% endblock %}
+
+{% include 'includes/nav.html' %}
+
+{% block body %}
+
+<div class="section">
+
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title purple-text">Join class</span>
+            <form action="" method="post">
+                {{ form.csrf_token }}
+                <div class="input-field">
+                    {{ form.name }}
+                    {{ form.name.label() }}
+                    <span class="helper-text">Enter the class code. Example: l4ac</span>
+                </div>
+                <div class="input-field right-align">
+                    {{ form.submit(class="btn-flat btn-small purple accent-4 white-text") }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

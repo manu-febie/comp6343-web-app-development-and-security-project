@@ -1,4 +1,5 @@
 flask/migrations/
+report/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

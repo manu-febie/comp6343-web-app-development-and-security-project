@@ -1,4 +1,4 @@
-{% if call_or_get(current_user.is_authenticated) %}
+{% if current_user.is_authenticated %}
 <!-- Nav for authenticated -->
 
 <div class="">
@@ -20,7 +20,7 @@
 {% else %}
 <nav class="purple accent-4">
     <div class="nav-wrapper container">
-        <a href="{{ url_for('pages.index') }}" class="brand-logo">DoUKnw</a>
+        <a href="" class="brand-logo">DoUKnw</a>
         <ul class="right hide-on-med-and-down">
             <li>
                 <a href="https://github.com/imanuelfebie/comp6343-web-app-development-and-security-project/tree/master/flask/app" class="waves-effect waves-light white purple-text btn-small">Github</a>

@@ -1,7 +1,7 @@
 from flask import Flask
+from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_user import UserManager, SQLAlchemyAdapter
 from flask_login import LoginManager
 from flask_mail import Mail
 from dotenv import load_dotenv
@@ -13,6 +13,7 @@ load_dotenv('.env')
 
 # Flask instance
 app = Flask(__name__)
+bc = Bcrypt(app)
 
 # Configs
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -21,35 +22,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['CSRF_ENABLED'] = True
 app.config['USER_ENABLE_EMAIL'] = False
 
-# Flask Mail 
-# app.config['MAIL_SERVER'] = 
-# app.config['MAIL_PORT']
-# app.config['MAIL_USE_TLS']
-# app.config['MAIL_USE_SSL']
-# app.config['MAIL_DEBUG']
-# app.config['MAIL_USERNAME']
-# app.config['MAIL_PASSWORD']
-# app.config['MAIL_DEFAULT_SENDER']
-# app.config['MAIL_MAX_EMAILS']
-# app.config['MAIL_SUPRESS_SEND']
-# app.config['MAIL_ASCII_ATTACHMENTS']
-
 # Database instance
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 mail = Mail(app)
 
 login_manager.login_view = 'users.login'
+login_manager.login_message = ''
 
 # import models
 from app.courses.models import ClassCode, Course, ClassCourses
 from app.users.models import User, Student
 from app.schools.models import School
 from app.quiz.models import Quiz
-
-# setup Flask-User
-user_manager = UserManager(app, db, User)
-#user_manager.login_view = 'users.login'
 
 # blueprints
 from app.courses.routes import courses

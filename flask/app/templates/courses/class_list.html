@@ -20,7 +20,7 @@
                 <div class="card-content">
                     <span class="card-title">Class Management</span>
 
-                    {% if class_list %}
+                    {% if current_user.class_code %}
                     <table class="responsive-table highlight">
                         <thead>
                             <tr>
@@ -28,9 +28,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for class in class_list %}
+                            {% for class, enroll in class_list %}
                             <tr>
-                                <td>{{ class.name }}</td>
+                                <td>{{ class }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>

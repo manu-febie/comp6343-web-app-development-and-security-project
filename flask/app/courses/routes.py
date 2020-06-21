@@ -1,6 +1,8 @@
 from app import db
-from app.courses.forms import CourseCreateForm, ClassCodeCreateForm
-from app.courses.models import ClassCode, Course, ClassCourses
+from app.courses.forms import CourseCreateForm, ClassCodeCreateForm, ClassJoinForm
+from app.courses.models import ClassCode, Course, ClassCourses, ClassEnrollment
+from app.users.models import User
+
 from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_required
 
@@ -16,21 +18,57 @@ def class_create():
                 name = form.class_code.data,
                 school_id = current_user.school.id
                 )
+        # add class
         db.session.add(class_code)
+        db.session.commit()
+        
+        # add current_user to this class
+        class_enrollment = ClassEnrollment(
+                    class_code_id = class_code.id,
+                    user_id = current_user.id
+                )
+        db.session.add(class_enrollment)
         db.session.commit()
 
         flash('Class has been addded')
 
-        return redirect(url_for('pages.educator_dashboard'))
+        return redirect(url_for('courses.class_list'))
 
     return render_template('courses/class_create.html', form=form)
 
 @courses.route('/class/management', methods=['GET', 'POST'])
 @login_required
 def class_list():
-    class_list = ClassCode.query.all()
+    class_list = db.session.query(ClassCode, ClassEnrollment)\
+                .outerjoin(ClassCode, ClassEnrollment.class_code_id == ClassCode.id)\
+                .filter(ClassEnrollment.user_id == current_user.id)
 
     return render_template('courses/class_list.html', class_list=class_list)
+
+@courses.route('/student/join/class', methods=['GET', 'POST'])
+@login_required
+def class_join():
+    # select class, add to user
+    form = ClassJoinForm()
+
+    if form.validate_on_submit():
+        class_code = ClassCode.query.filter(ClassCode.name == form.name.data).first()
+        
+        if not class_code:
+            flash('class_code does not exist')
+
+        class_enroll = ClassEnrollment(
+                    class_code_id = class_code.id,
+                    user_id = current_user.id)
+        db.session.add(class_enroll)
+        db.session.commit()
+
+        flash(f'Yey! You joined {class_code.name}')
+
+        return redirect(url_for('pages.educator_dashboard'))
+
+
+    return render_template('courses/class_join.html', form=form)
 
 @courses.route('/class/delete')
 @login_required
@@ -74,13 +112,6 @@ def course_create():
         return redirect(url_for('pages.educator_dashboard'))
 
     return render_template('courses/create.html', form=form)
-
-@courses.route('/<name>/join-class', methods=['GET', 'POST'])
-@login_required
-def student_class_join(name):
-    
-    return render_template('courses/student_join_class.html', form=form)
-
 
 
 
