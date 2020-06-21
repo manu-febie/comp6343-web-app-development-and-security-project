@@ -8,13 +8,14 @@
 
 <section class="section">
     <div class="row">
-        <div class="col l3">
+        <div class="col l3 m12 s12">
             <ul class="collection">
                 <li class="collection-item"><a href="#douknow" class="purple-text">Why DoUKnw</a></li>
                 <li class="collection-item"><a href="#getting-started" class="purple-text">Getting started</a></li>
+                <li class="collection-item"><a href="#api" class="purple-text">API</a></li>
             </ul>
         </div>
-        <div class="col l9">
+        <div class="col l9 m12 s12">
             <h5 id="douknow" class="purple-text">Why DoUKnw</h5>
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos natus, reiciendis, sapiente doloribus, veritatis possimus totam cum sit minus mollitia autem dolorum adipisci laboriosam reprehenderit quo ab nulla officiis. Voluptates!</p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur quod sapiente, natus commodi cupiditate exercitationem eius mollitia maiores ea dolorum eaque recusandae, id nesciunt cumque laboriosam accusamus corrupti facere impedit!
             <p>
@@ -22,7 +23,12 @@
             <h5 id="getting-started" class="purple-text">Getting started</h5>
             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur nihil beatae voluptates sequi obcaecati tenetur, ipsam quisquam aliquid? Ad dolorem quibusdam quos velit aperiam necessitatibus, fugit magni ea natus nam.</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi est dicta consectetur veritatis hic qui odit rem perferendis atque? Incidunt sapiente fugit facere optio molestias eius quos doloribus harum perferendis.</p>
-
+            <h5 id="api"><a id="#api" class="purple-text">API</a></h5>
+            <ul>
+                <li><a href="{{ url_for('user_api.user_get') }}">users</a></li>
+                <li><a href="{{ url_for('course_api.class_list') }}">classes</a></li>
+                <li><a href="{{ url_for('course_api.course_list') }}">courses</a></li>
+            </ul>
         </div>
     </div>
     </section>
