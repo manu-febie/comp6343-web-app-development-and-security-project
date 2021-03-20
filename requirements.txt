@@ -39,7 +39,7 @@ html5lib==1.0.1
 idna==2.9
 itsdangerous==1.1.0
 jedi==0.17.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 lensfun==0.3.95
 LibAppArmor==2.13.4
 lit==0.10.0.dev0
