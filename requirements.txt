@@ -88,7 +88,7 @@ python-dateutil==2.8.1
 python-dotenv==0.13.0
 python-editor==1.0.4
 pytoml==0.1.21
-PyYAML==5.3.1
+PyYAML==5.4
 qutebrowser==1.12.0
 ranger-fm==1.9.3
 requests==2.23.0
