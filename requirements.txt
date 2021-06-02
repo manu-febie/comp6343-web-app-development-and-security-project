@@ -102,7 +102,7 @@ team==1.0
 toml==0.10.1
 tornado==6.0.4
 torrequest==0.1.0
-urllib3==1.25.9
+urllib3==1.26.5
 uWSGI==2.0.18
 virtualenv==20.0.20
 virtualenv-clone==0.5.4
